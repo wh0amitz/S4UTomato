@@ -20,7 +20,7 @@ Before this, we need to obtain a TGT (Ticket Granting Ticket) for the local mach
 C:\Users\whoami\Desktop>S4UTomato.exe --help
 
 S4UTomato 1.0.0-beta
-Copyright (c) 2023 whoamianony.top
+Copyright (c) 2023
 
   -d, --Domain              Domain (FQDN) to authenticate to.
   -s, --Server              Host name of domain controller or LDAP server.
