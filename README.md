@@ -2,8 +2,6 @@
 
 Escalate Service Account To LocalSystem via Kerberos.
 
-[toc]
-
 ## Traditional Potatoes
 
 Friends familiar with the "Potato" series of privilege escalation should know that it can elevate service account privileges to local system privileges. The early exploitation techniques of "Potato" are almost identical: leveraging certain features of COM interfaces, deceiving the NT AUTHORITY\SYSTEM account to connect and authenticate to an attacker-controlled RPC server. Then, through a series of API calls, an intermediary (NTLM Relay) attack is executed during this authentication process, resulting in the generation of an access token for the NT AUTHORITY\SYSTEM account on the local system. Finally, this token is stolen, and the `CreateProcessWithToken()` or `CreateProcessAsUser()` function is used to pass the token and create a new process to obtain SYSTEM privileges.
